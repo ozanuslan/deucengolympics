@@ -15,7 +15,7 @@ public class Menu {
     }
 
     public static void Primary() {
-        System.out.println("*****MENU*****");
+        System.out.println("******MENU******");
         System.out.println("1- Generate Fixture");
         System.out.println("2- Perform Tournaments");
         System.out.println("3- Show Statistics");
