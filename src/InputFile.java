@@ -4,17 +4,18 @@ import java.util.Scanner;
 
 public class InputFile {
     public static String[] METADATA;
-    //Reads the input file and writes the contents of that file into and array
-    public static void open() {
+
+    //Reads the input file and writes the contents of that file into an array
+    public static void open(String PATH) {
         try {
-            int line_count = 0;
-            File myObj = new File("C:\\Users\\Ucak\\Desktop\\Olympiad\\out\\production\\Olympiad\\input.txt");
+            int lineCount = 0;
+            File myObj = new File(PATH);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 myReader.nextLine();
-                line_count++;
+                lineCount++;
             }
-            METADATA = new String[line_count];
+            METADATA = new String[lineCount];
             int index = 0;
             Scanner myReader2 = new Scanner(myObj);
             while (myReader2.hasNextLine()) {
