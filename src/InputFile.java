@@ -73,6 +73,4 @@ public class InputFile {
         }
         return PLAYERCOUNTS_BY_SPORTS;
     }
-
-
 }
