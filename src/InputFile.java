@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 public class InputFile {
     public static String[] METADATA;
+    public static String[][] ATHLETES;
 
     //Reads the input file and writes the contents of that file into an array
-    public static void open(String PATH) {
+    public static String[] open(String PATH) {
         try {
             int lineCount = 0;
             File myObj = new File(PATH);
@@ -28,5 +29,15 @@ public class InputFile {
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
         }
+        return METADATA;
+    }
+    public static String[][] splitData(){
+        open("/home/ozan/Downloads/input.txt");
+        ATHLETES = new String[METADATA.length][6];
+        for(int i = 0; i<METADATA.length; i++){
+            ATHLETES[i] = METADATA[i].split(",");
+            ATHLETES[i][5] = "0";
+        }
+        return ATHLETES;
     }
 }
