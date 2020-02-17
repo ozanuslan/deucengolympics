@@ -3,12 +3,12 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class InputFile {
-    private static String[] METADATA;
-    public static Athlete[] ATHLETE;
-    private String[] dataSplit = new String[7];
+    public static String[] METADATA;
+    private String[] dataSplit = new String[6];
+    public Athlete ATHLETES[] = new Athlete[METADATA.length];
 
     // Reads the input file and writes the contents of that file into an array
-    public String[] open(String PATH) {
+    public static String[] open(String PATH) {
         try {
             int lineCount = 0;
             Scanner myReader = new Scanner(new File(PATH));
@@ -35,7 +35,26 @@ public class InputFile {
         return METADATA;
     }
 
-    public Athlete[] splitData(){
-        //TODO: add metadata info to athletes object array
+    private void initObjects() {
+        for (int i = 0; i < ATHLETES.length; i++) {
+            ATHLETES[i] = new Athlete();
+        }
+    }
+
+    // Fill the object array of athletes for ease of access on the information
+    public Athlete[] fillAthleteData() {
+        initObjects();
+        for (int i = 0; i < METADATA.length; i++) {
+            dataSplit = METADATA[i].split(",");
+            System.out.println(dataSplit[4]);
+            ATHLETES[i].setCountry(dataSplit[0]); // Country
+            ATHLETES[i].setSport(dataSplit[1]); // Sport
+            ATHLETES[i].setName(dataSplit[2]); // Name
+            ATHLETES[i].setGender(dataSplit[3]); // Gender
+            ATHLETES[i].setBirthDate(dataSplit[4]); // Birthdate
+            ATHLETES[i].setSkill(dataSplit[5]); // Skill level
+            ATHLETES[i].setPoint(0); // Initial point of the athlete
+        }
+        return ATHLETES;
     }
 }
