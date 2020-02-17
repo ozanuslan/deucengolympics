@@ -7,9 +7,11 @@ public class Menu {
     public static void printFixture() {
 
     }
+
     public static void printTournaments() {
 
     }
+
     public static void printStatistics() {
 
     }
@@ -21,13 +23,11 @@ public class Menu {
         System.out.println("3- Show Statistics");
         String ans = sc.nextLine();
 
-        if(ans.equals("1")) {
+        if (ans.equals("1")) {
             printFixture();
-        }
-        else if(ans.equals("2")) {
+        } else if (ans.equals("2")) {
             printTournaments();
-        }
-        else if(ans.equals("3")){
+        } else if (ans.equals("3")) {
             printStatistics();
         }
     }
