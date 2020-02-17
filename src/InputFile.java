@@ -3,11 +3,12 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class InputFile {
-    public static String[] METADATA;
-    public static String[][] ATHLETES;
+    private static String[] METADATA;
+    public static Athlete[] ATHLETE;
+    private String[] dataSplit = new String[7];
 
     // Reads the input file and writes the contents of that file into an array
-    public static String[] open(String PATH) {
+    public String[] open(String PATH) {
         try {
             int lineCount = 0;
             Scanner myReader = new Scanner(new File(PATH));
@@ -32,5 +33,9 @@ public class InputFile {
             System.out.println(ex);
         }
         return METADATA;
+    }
+
+    public Athlete[] splitData(){
+        //TODO: add metadata info to athletes object array
     }
 }
