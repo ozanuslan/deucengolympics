@@ -1,45 +1,80 @@
-class Athlete{
+class Athlete {
     String country;
     String sport;
     String name;
     String birthdate;
+    String gender;
     double skill;
     int point;
-
-    public Athlete(String country, String sport, String name, String birthdate, double skill, int point){
-        this.country = country;
-        this.sport = sport;
-        this.name = name;
-        this.birthdate = birthdate;
-        this.skill = skill;
-        this.point = point;
+    
+    public Athlete(){
+        country = "";
+        sport = "";
+        name = "";
+        birthdate = "";
+        gender = "";
+        skill = 0;
+        point = 0;
     }
 
-    public String getCountry(){
+    public String getCountry() {
         return country;
     }
 
-    public String getSport(){
+    public String getSport() {
         return sport;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public String getBirthDate(){
-        return country;
+    
+    public String getGender() {
+        return gender;
     }
 
-    public double getSkill(){
+    public String getBirthDate() {
+        return birthdate;
+    }
+
+    public double getSkill() {
         return skill;
     }
 
-    public int getPoint(){
+    public int getPoint() {
         return point;
     }
 
-    public void incrementPoint(){
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setBirthDate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = Double.parseDouble(skill);
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public void incrementPoint() {
         point++;
     }
 }
