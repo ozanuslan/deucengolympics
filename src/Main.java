@@ -6,13 +6,16 @@ public class Main {
     public static void main(String[] args) {
         PATH = "input.txt";
         InputFile.open(PATH);
-        /*
-        for (int i = 0; i < InputFile.ATHLETES.length; i++) {
-            for (int j = 0; j < InputFile.ATHLETES[i].length; j++) {
-                System.out.print(InputFile.ATHLETES[i][j] + " ");
-            }
-            System.out.println();
+        InputFile file = new InputFile();
+        file.fillAthleteData();
+        
+        for(int i = 0; i<file.ATHLETES.length; i++){
+            System.out.println(file.ATHLETES[i].getCountry()+" "
+            +file.ATHLETES[i].getSport()+" "
+            +file.ATHLETES[i].getName()+" "
+            +file.ATHLETES[i].getGender()+" "
+            +file.ATHLETES[i].getBirthDate()+" "
+            +file.ATHLETES[i].getSkill());
         }
-        */
     }
 }
