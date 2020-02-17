@@ -1,0 +1,8 @@
+USA,Tennis,Serena Williams,F,26.09.1981,0.83
+RUS,Tennis,Maria Sharapova,F,19.04.1987,0.92
+D,Chess,Elisabeth Pähtz,F,08.01.1985,0.84
+USA,Chess,Susan Polgar,F,19.04.1969,0.91
+TR,Tennis,Çağla Büyükakçay,F,28.09.1989,0.85
+RUS,Chess,Maksim Matlakov,M,05.03.1991,0.87
+TR,Chess,Mustafa Yılmaz,M,05.11.1992,0.93
+D,Tennis,Alexander Zverev,M,20.04.1997,0.91
