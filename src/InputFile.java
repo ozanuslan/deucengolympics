@@ -35,6 +35,10 @@ public class InputFile {
         return METADATA;
     }
 
+    /*
+     * todo: Remove this method and initialize each object in the fillAthleteData
+     * function using a constructor in Athlete class to clean up the code.
+     */
     private void initObjects() {
         for (int i = 0; i < ATHLETES.length; i++) {
             ATHLETES[i] = new Athlete();
@@ -42,11 +46,11 @@ public class InputFile {
     }
 
     // Fill the object array of athletes for ease of access on the information
+    // dataSplit[COUNTRY,SPORT,NAME,GENDER,BIRTHDATE,SKILL]
     public Athlete[] fillAthleteData() {
         initObjects();
         for (int i = 0; i < METADATA.length; i++) {
             dataSplit = METADATA[i].split(",");
-            System.out.println(dataSplit[4]);
             ATHLETES[i].setCountry(dataSplit[0]); // Country
             ATHLETES[i].setSport(dataSplit[1]); // Sport
             ATHLETES[i].setName(dataSplit[2]); // Name
