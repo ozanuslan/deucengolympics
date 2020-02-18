@@ -1,4 +1,4 @@
-class Sport{
+public class Sport{
     String sport;
     int playerCount;
 
