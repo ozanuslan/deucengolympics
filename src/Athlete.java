@@ -1,4 +1,4 @@
-class Athlete {
+public class Athlete {
     String country;
     String sport;
     String name;
@@ -7,13 +7,15 @@ class Athlete {
     double skill;
     int point;
     
-    public Athlete(){
-        country = "";
-        sport = "";
-        name = "";
-        birthdate = "";
-        gender = "";
-        skill = 0;
+    public Athlete(String country, String sport, 
+    String name, String birthdate,String gender, 
+    Double skill){
+        this.country = country;
+        this.sport = sport;
+        this.name = name;
+        this.birthdate = birthdate;
+        this.gender = gender;
+        this.skill = skill;
         point = 0;
     }
 
@@ -44,34 +46,6 @@ class Athlete {
 
     public int getPoint() {
         return point;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setSport(String sport) {
-        this.sport = sport;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setBirthDate(String birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public void setSkill(String skill) {
-        this.skill = Double.parseDouble(skill);
-    }
-
-    public void setPoint(int point) {
-        this.point = point;
     }
 
     public void incrementPoint() {
