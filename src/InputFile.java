@@ -4,8 +4,14 @@ import java.util.Scanner;
 
 public class InputFile {
     public static String[] METADATA;
+    private static int MAX_COUNTRY = 20;
     private String[] dataSplit = new String[6];
     public Athlete ATHLETES[] = new Athlete[METADATA.length];
+    public Country COUNTRIES[];
+    private String[] seenCountry = new String[MAX_COUNTRY];
+    private static int countryIndex = 0;
+    private boolean isSeen;
+    private boolean isFull;
 
     // Reads the input file and writes the contents of that file into an array
     public static String[] open(String PATH) {
@@ -35,29 +41,44 @@ public class InputFile {
         return METADATA;
     }
 
-    /*
-     * todo: Remove this method and initialize each object in the fillAthleteData
-     * function using a constructor in Athlete class to clean up the code.
-     */
-    private void initObjects() {
-        for (int i = 0; i < ATHLETES.length; i++) {
-            ATHLETES[i] = new Athlete();
+    public Country[] fillCountryData(){
+        countryIndex = 0;
+        for(int i = 0; i < METADATA.length; i++){
+            dataSplit = METADATA[i].split(",");
+            isSeen = false;
+            for(int j = 0; j<seenCountry.length; j++){
+                if(dataSplit[0].equalsIgnoreCase(seenCountry[j])){
+                    isSeen = true;
+                    break;
+                }
+            }
+            if(countryIndex > 20){
+                isFull = true;
+                break;
+            }
+            if(!isSeen){
+                seenCountry[countryIndex] = dataSplit[0];
+                countryIndex++;
+            }
         }
-    }
+        if(isFull){
+            //todo: error message
+        }
 
+        COUNTRIES = new Country[countryIndex];
+        for(int i = 0; i < countryIndex; i++){
+            COUNTRIES[i] = new Country(seenCountry[i].toUpperCase());
+        }
+        
+        return COUNTRIES;
+    }
     // Fill the object array of athletes for ease of access on the information
     // dataSplit[COUNTRY,SPORT,NAME,GENDER,BIRTHDATE,SKILL]
     public Athlete[] fillAthleteData() {
-        initObjects();
         for (int i = 0; i < METADATA.length; i++) {
             dataSplit = METADATA[i].split(",");
-            ATHLETES[i].setCountry(dataSplit[0]); // Country
-            ATHLETES[i].setSport(dataSplit[1]); // Sport
-            ATHLETES[i].setName(dataSplit[2]); // Name
-            ATHLETES[i].setGender(dataSplit[3]); // Gender
-            ATHLETES[i].setBirthDate(dataSplit[4]); // Birthdate
-            ATHLETES[i].setSkill(dataSplit[5]); // Skill level
-            ATHLETES[i].setPoint(0); // Initial point of the athlete
+            ATHLETES[i] = new Athlete(dataSplit[0], dataSplit[1], dataSplit[2], 
+            dataSplit[3], dataSplit[4],Double.parseDouble(dataSplit[5]));
         }
         return ATHLETES;
     }
