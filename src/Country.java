@@ -8,6 +8,14 @@ public class Country{
         point = 0;
     }
     
+    public String getCountry(){
+        return country;
+    }
+
+    public int getPoint(){
+        return point;
+    }
+
     public void incrementPoint(){
         point++;
     }

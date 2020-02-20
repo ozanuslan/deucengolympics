@@ -1,9 +1,6 @@
 import java.util.Random;
 
 public class Match {
-    public static int DAY = 24; //Initial day
-    public static int MONTH = 7; //Initial month
-    public static int YEAR = 2020; //Initial year
     String hour;
     String sport;
     Athlete ath1;

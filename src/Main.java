@@ -15,7 +15,7 @@ public class Main {
                     + file.ATHLETES[i].getBirthDate() + " " + file.ATHLETES[i].getSkill());
         }
         for(int i = 0; i<file.COUNTRIES.length; i++){
-            System.out.println(file.COUNTRIES[i].country+" "+file.COUNTRIES[i].point);
+            System.out.println(file.COUNTRIES[i].getCountry()+" "+file.COUNTRIES[i].getPoint());
         }
     }
 }
