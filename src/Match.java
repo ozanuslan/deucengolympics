@@ -1,23 +1,16 @@
 import java.util.Random;
 
 public class Match {
-    String hour;
     String sport;
     Athlete ath1;
     Athlete ath2;
     String winner;
-
     Random rnd = new Random();
 
-    public Match(String hour, String sport, Athlete ath1, Athlete ath2) {
-        this.hour = hour;
+    public Match(String sport, Athlete ath1, Athlete ath2) {
         this.sport = sport;
         this.ath1 = ath1;
         this.ath2 = ath2;
-    }
-
-    public String getHour() {
-        return hour;
     }
 
     public String getSport() {
