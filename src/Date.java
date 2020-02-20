@@ -4,7 +4,6 @@ public class Date{
     public static int YEAR = 2020; //Initial year
     int hour;
     int min;
-    Match[] MATCHES;
 
     public Date(){
 
