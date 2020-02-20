@@ -12,6 +12,7 @@ public class InputFile {
     private static int countryIndex = 0;
     private boolean isSeen;
     private boolean isFull;
+    public Sport[] SPORTS;
 
     // Reads the input file and writes the contents of that file into an array
     public static String[] open(String PATH) {
