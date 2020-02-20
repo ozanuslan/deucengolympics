@@ -4,14 +4,17 @@ import java.util.Scanner;
 
 public class InputFile {
     public static String[] METADATA;
-    private static int MAX_COUNTRY = 20;
     private String[] dataSplit = new String[6];
     public Athlete ATHLETES[] = new Athlete[METADATA.length];
+
     public Country COUNTRIES[];
+    private static int MAX_COUNTRY = 20;
     private String[] seenCountry = new String[MAX_COUNTRY];
     private static int countryIndex = 0;
+    
     private boolean isSeen;
     private boolean isFull;
+
     public Sport[] SPORTS;
 
     // Reads the input file and writes the contents of that file into an array
