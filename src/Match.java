@@ -5,6 +5,7 @@ public class Match {
     Athlete ath1;
     Athlete ath2;
     String winner;
+    Date date;
     Random rnd = new Random();
 
     public Match(String sport, Athlete ath1, Athlete ath2) {
