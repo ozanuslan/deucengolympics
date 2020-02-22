@@ -1,24 +1,23 @@
 public class Olympiad {
-    static Tournament[] TOURNAMENTS;
-    static Sport[] SPORTS;
-    static int tournamentCount;
-    public Olympiad(Sport[] SPORTS_ARR){
-        SPORTS = SPORTS_ARR;
+    public Tournament[] TOURNAMENTS;
+    public Sport[] SPORTS;
+    public static Country[] COUNTRIES;
+    public static int tournamentCount;
+
+
+    public Olympiad(Sport[] SPORTS_ARR, Country[] COUNTRIES_ARR) {
+        this.SPORTS = SPORTS_ARR;
+        COUNTRIES = COUNTRIES_ARR;
         tournamentCount = SPORTS.length;
         TOURNAMENTS = new Tournament[tournamentCount];
     }
-    public static Tournament[] generateFixture() {
-        for(int i = 0; i < tournamentCount; i++){
-            int startingDay = 24;
-            int startingMonth = 7;
-            int startingYear = 2020;
+
+    public Tournament[] generateTourments() {
+        for (int i = 0; i < tournamentCount; i++) {
             TOURNAMENTS[i] = new Tournament(SPORTS[i]);
+            TOURNAMENTS[i].generateMatches();
         }
-        
+
         return TOURNAMENTS;
-    }
-
-    public static void performTournament() {
-
     }
 }
