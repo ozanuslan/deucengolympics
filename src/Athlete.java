@@ -6,10 +6,8 @@ public class Athlete {
     String gender;
     double skill;
     int point;
-    
-    public Athlete(String country, String sport, 
-    String name, String birthdate,String gender, 
-    Double skill){
+
+    public Athlete(String country, String sport, String name, String birthdate, String gender, Double skill) {
         this.country = country;
         this.sport = sport;
         this.name = name;
@@ -17,6 +15,11 @@ public class Athlete {
         this.gender = gender;
         this.skill = skill;
         point = 0;
+    }
+
+    //This constructor is for initialization of the Athlete array in the Sport class.
+    public Athlete(){
+
     }
 
     public String getCountry() {
@@ -31,7 +34,6 @@ public class Athlete {
         return name;
     }
 
-    
     public String getGender() {
         return gender;
     }
