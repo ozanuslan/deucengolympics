@@ -1,22 +1,39 @@
-public class Sport{
+public class Sport {
     String sport;
-    Athlete[] ATHLETES_BY_SPORT = new Athlete[InputFile.METADATA.length];
+    Athlete[] ATHLETES_BY_SPORT;
+    int index;
     int playerCount;
 
-    public Sport(String sport){
+    public Sport(String sport) {
         this.sport = sport;
-        this.playerCount = 1;
+        this.playerCount = 0;
+        this.index = 0;
     }
 
-    public String getSport(){
+    public String getSport() {
         return sport;
     }
 
-    public int getPlayerCount(){
+    public int getPlayerCount() {
         return playerCount;
     }
 
-    public void incrementPlayerCount(){
+    public void initAthleteArrElems() {
+        for (int i = 0; i < ATHLETES_BY_SPORT.length; i++) {
+            ATHLETES_BY_SPORT[i] = new Athlete();
+        }
+    }
+
+    public void initAthleteArr() {
+        ATHLETES_BY_SPORT = new Athlete[playerCount];
+        initAthleteArrElems();
+    }
+
+    public void incrementIndex() {
+        index++;
+    }
+
+    public void incrementPlayerCount() {
         playerCount++;
     }
 }
