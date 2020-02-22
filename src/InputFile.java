@@ -5,17 +5,20 @@ import java.util.Scanner;
 public class InputFile {
     public static String[] METADATA;
     private String[] dataSplit = new String[6];
-    public Athlete ATHLETES[] = new Athlete[METADATA.length];
+    public Athlete[] ATHLETES = new Athlete[METADATA.length];
 
-    public Country COUNTRIES[];
+    public Country[] COUNTRIES;
     private static int MAX_COUNTRY = 20;
     private String[] seenCountry = new String[MAX_COUNTRY];
     private static int countryIndex = 0;
-    
-    private boolean isSeen;
-    private boolean isFull;
 
     public Sport[] SPORTS;
+    private static int MAX_SPORT = 20;
+    private String[] seenSport = new String[MAX_SPORT];
+    private static int sportIndex = 0;
+
+    private boolean isSeen;
+    private boolean isFull;
 
     // Reads the input file and writes the contents of that file into an array
     public static String[] open(String PATH) {
@@ -45,45 +48,99 @@ public class InputFile {
         return METADATA;
     }
 
-    public Country[] fillCountryData(){
+    public Country[] fillCountryData() {
         countryIndex = 0;
-        for(int i = 0; i < METADATA.length; i++){
+        for (int i = 0; i < METADATA.length; i++) {
             dataSplit = METADATA[i].split(",");
             isSeen = false;
-            for(int j = 0; j<seenCountry.length; j++){
-                if(dataSplit[0].equalsIgnoreCase(seenCountry[j])){
+            for (int j = 0; j < seenCountry.length; j++) {
+                if (dataSplit[0].equalsIgnoreCase(seenCountry[j])) {
                     isSeen = true;
                     break;
                 }
             }
-            if(countryIndex > 20){
+            if (countryIndex > 20) {
                 isFull = true;
                 break;
             }
-            if(!isSeen){
+            if (!isSeen) {
                 seenCountry[countryIndex] = dataSplit[0];
                 countryIndex++;
             }
         }
-        if(isFull){
-            //todo: error message
+        if (isFull) {
+            // todo: error message
         }
 
         COUNTRIES = new Country[countryIndex];
-        for(int i = 0; i < countryIndex; i++){
+        for (int i = 0; i < countryIndex; i++) {
             COUNTRIES[i] = new Country(seenCountry[i].toUpperCase());
         }
-        
+
         return COUNTRIES;
     }
-    // Fill the object array of athletes for ease of access on the information
-    // dataSplit[COUNTRY,SPORT,NAME,GENDER,BIRTHDATE,SKILL]
-    public Athlete[] fillAthleteData() {
+
+    public Sport[] fillSportName() {
+        sportIndex = 0;
         for (int i = 0; i < METADATA.length; i++) {
             dataSplit = METADATA[i].split(",");
-            ATHLETES[i] = new Athlete(dataSplit[0], dataSplit[1], dataSplit[2], 
-            dataSplit[3], dataSplit[4],Double.parseDouble(dataSplit[5]));
+            isSeen = false;
+            for (int j = 0; j < seenSport.length; j++) {
+                if (dataSplit[1].equalsIgnoreCase(seenSport[j])) {
+                    isSeen = true;
+                    break;
+                }
+            }
+            if (sportIndex > 20) {
+                isFull = true;
+                break;
+            }
+            if (!isSeen) {
+                seenSport[sportIndex] = dataSplit[1];
+                sportIndex++;
+            }
         }
-        return ATHLETES;
+        if (isFull) {
+            // todo: error message
+        }
+
+        SPORTS = new Sport[sportIndex];
+        for (int i = 0; i < sportIndex; i++) {
+            SPORTS[i] = new Sport(seenSport[i].toUpperCase());
+        }
+
+        return SPORTS;
+    }
+
+    // Fill the object array of athletes for ease of access on the information
+    // dataSplit[COUNTRY,SPORT,NAME,GENDER,BIRTHDATE,SKILL]
+    public void fillAthleteData() {
+        for (int i = 0; i < METADATA.length; i++) {
+            dataSplit = METADATA[i].split(",");
+            ATHLETES[i] = new Athlete(dataSplit[0], dataSplit[1].toUpperCase(), dataSplit[2], dataSplit[3], dataSplit[4],
+                    Double.parseDouble(dataSplit[5]));
+            for (int j = 0; j < SPORTS.length; j++) {
+                if (ATHLETES[i].sport.equals(SPORTS[j].sport)) {
+                    SPORTS[j].incrementPlayerCount();
+                    break;
+                }
+            }
+        }
+    }
+
+    public Sport[] fillSportAthlete() {
+        for (int i = 0; i < SPORTS.length; i++) {
+            SPORTS[i].initAthleteArr();
+        }
+        for (int i = 0; i < ATHLETES.length; i++) {
+            for (int j = 0; j < SPORTS.length; j++) {
+                if(ATHLETES[i].sport.equals(SPORTS[j].sport)){
+                    SPORTS[j].ATHLETES_BY_SPORT[SPORTS[j].index] = ATHLETES[i];
+                    SPORTS[j].incrementIndex();
+                    break;
+                }
+            }
+        }
+        return SPORTS;
     }
 }
