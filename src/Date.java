@@ -1,12 +1,15 @@
-public class Date{
-    int day; //Initial day
-    int month; //Initial month 
-    int year; //Initial year
+public class Date {
+    int day;
+    int month;
+    int year;
     int hour;
-    int min;
+    String min = "00";
 
-    public Date(){
-
+    public Date(int day, int month, int year, int hour) {
+        this.day = day;
+        this.month = month;
+        this.year = year;
+        this.hour = hour;
     }
 
 }
