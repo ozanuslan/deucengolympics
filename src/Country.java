@@ -1,22 +1,22 @@
-public class Country{
+public class Country {
     String country;
     int point;
     Match MATCHES[];
 
-    public Country(String country){
+    public Country(String country) {
         this.country = country;
         point = 0;
     }
-    
-    public String getCountry(){
+
+    public String getCountry() {
         return country;
     }
 
-    public int getPoint(){
+    public int getPoint() {
         return point;
     }
 
-    public void incrementPoint(){
+    public void incrementPoint() {
         point++;
     }
 }
