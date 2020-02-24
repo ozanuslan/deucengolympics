@@ -206,11 +206,13 @@ public class Menu {
             month = Integer.parseInt(dateSplit[1]);
             year = Integer.parseInt(dateSplit[2]);
             
+            boolean isFound = false;
             for (int i = 0; i < Main.olympiad.TOURNAMENTS.length; i++) {
                 for (int j = 0; j < Main.olympiad.TOURNAMENTS[i].MATCHES.length; j++) {
                     if(Main.olympiad.TOURNAMENTS[i].MATCHES[j].date.day == day&&
                     Main.olympiad.TOURNAMENTS[i].MATCHES[j].date.month == month&&
                     Main.olympiad.TOURNAMENTS[i].MATCHES[j].date.year == year){
+                        isFound = true;
                         System.out.print(Main.olympiad.TOURNAMENTS[i].MATCHES[j].date.day + ".");
                         System.out.print(Main.olympiad.TOURNAMENTS[i].MATCHES[j].date.month + ".");
                         System.out.print(Main.olympiad.TOURNAMENTS[i].MATCHES[j].date.year + " ");
@@ -223,6 +225,9 @@ public class Menu {
                         System.out.println(Main.olympiad.TOURNAMENTS[i].MATCHES[j].ath2.name + "  ");
                     }
                 }
+            }
+            if(!isFound){
+                System.out.println("No matches found on specified date.");
             }
          } catch (NumberFormatException e) {  
             System.out.println("Incorrect date format.");
