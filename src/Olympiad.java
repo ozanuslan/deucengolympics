@@ -1,7 +1,7 @@
 public class Olympiad {
     public Tournament[] TOURNAMENTS;
     public Sport[] SPORTS;
-    public static Country[] COUNTRIES;
+    public Country[] COUNTRIES;
     public static int tournamentCount;
 
 
