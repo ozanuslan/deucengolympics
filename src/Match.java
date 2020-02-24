@@ -22,9 +22,9 @@ public class Match {
     }
 
     private void incrementCountryPoint(Athlete ath) {
-        for (int i = 0; i < Olympiad.COUNTRIES.length; i++) {
-            if (ath.getCountry().equals(Olympiad.COUNTRIES[i].country)) {
-                Olympiad.COUNTRIES[i].incrementPoint();
+        for (int i = 0; i < Main.olympiad.COUNTRIES.length; i++) {
+            if (ath.getCountry().equals(Main.olympiad.COUNTRIES[i].country)) {
+                Main.olympiad.COUNTRIES[i].incrementPoint();
                 break;
             }
         }
