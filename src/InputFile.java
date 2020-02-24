@@ -5,7 +5,11 @@ import java.util.Scanner;
 public class InputFile {
     public static String[] METADATA;
     private String[] dataSplit = new String[6];
+
     public Athlete[] ATHLETES = new Athlete[METADATA.length];
+    private static int MAX_ATHLETE = 400;
+    private Athlete[] seenAthlete = new Athlete[MAX_ATHLETE];
+    private static int athleteIndex = 0;
 
     public Country[] COUNTRIES;
     private static int MAX_COUNTRY = 20;
@@ -115,17 +119,52 @@ public class InputFile {
     // Fill the object array of athletes for ease of access on the information
     // dataSplit[COUNTRY,SPORT,NAME,GENDER,BIRTHDATE,SKILL]
     public void fillAthleteData() {
+        for(int i = 0; i<seenAthlete.length; i++){
+            seenAthlete[i] = new Athlete();
+        }
+        int duplicateAthlete = 0;
+        athleteIndex = 0;
         for (int i = 0; i < METADATA.length; i++) {
             dataSplit = METADATA[i].split(",");
-            ATHLETES[i] = new Athlete(dataSplit[0], dataSplit[1].toUpperCase(), dataSplit[2], dataSplit[3], dataSplit[4],
-                    Double.parseDouble(dataSplit[5]));
+            isSeen = false;
+            for (int j = 0; j < seenAthlete.length; j++) {
+                if (dataSplit[0].equalsIgnoreCase(seenAthlete[j].country)&& dataSplit[1].equalsIgnoreCase(seenAthlete[j].sport)){
+                    isSeen = true;
+                    break;
+                }
+            }
+            if (athleteIndex > 400) {
+                isFull = true;
+                break;
+            }
+            if (!isSeen) {
+                seenAthlete[athleteIndex] = new Athlete(dataSplit[0].toUpperCase(), dataSplit[1].toUpperCase(), dataSplit[2] , dataSplit[4] , dataSplit[3], Double.parseDouble(dataSplit[5]));
+                athleteIndex++;
+            }
+            else{
+                duplicateAthlete++;
+            }
+        }
+        if (isFull) {
+            // todo: error message
+        }
+        if(duplicateAthlete>0){
+            System.out.println(duplicateAthlete+" duplicate athletes found.");
+        }
+
+        ATHLETES = new Athlete[athleteIndex];
+        for (int i = 0; i < athleteIndex; i++) {
+            ATHLETES[i] = new Athlete();
+            ATHLETES[i] = seenAthlete[i];
+        }
+        for(int i = 0; i< ATHLETES.length; i++){
             for (int j = 0; j < SPORTS.length; j++) {
                 if (ATHLETES[i].sport.equals(SPORTS[j].sport)) {
                     SPORTS[j].incrementPlayerCount();
                     break;
                 }
             }
-        }
+        }    
     }
 
     public Sport[] fillSportAthlete() {
