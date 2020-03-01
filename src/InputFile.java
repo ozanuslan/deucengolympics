@@ -6,7 +6,7 @@ public class InputFile {
     public static String[] METADATA;
     private String[] dataSplit = new String[6];
 
-    public Athlete[] ATHLETES = new Athlete[METADATA.length];
+    public Athlete[] ATHLETES;
     private static int MAX_ATHLETE = 400;
     private Athlete[] seenAthlete = new Athlete[MAX_ATHLETE];
     private static int athleteIndex = 0;
@@ -46,8 +46,10 @@ public class InputFile {
             myReader2.close();
         } catch (FileNotFoundException e) {
             System.out.println(e);
+            System.exit(0);
         } catch (Exception ex) {
             System.out.println(ex);
+            System.exit(0);
         }
         return METADATA;
     }
