@@ -23,34 +23,93 @@ public class InputFile {
 
     private boolean isSeen;
     private boolean isFull;
+    
+    private static int athlete_birthdate_day;
+    private static int athlete_birthdate_month;
+    private static int athlete_birthdate_year;
 
     // Reads the input file and writes the contents of that file into an array
     public static String[] open(String PATH) {
         try {
             int lineCount = 0;
-            Scanner myReader = new Scanner(new File(PATH));
+            Scanner myReader = new Scanner(new File(PATH),"UTF8");
             while (myReader.hasNextLine()) {
                 myReader.nextLine();
                 lineCount++;
             }
             myReader.close();
 
-            METADATA = new String[lineCount];
-            int index = 0;
-            Scanner myReader2 = new Scanner(new File(PATH));
-            while (myReader2.hasNextLine()) {
-                String data = myReader2.nextLine();
-                METADATA[index] = data;
-                index++;
+            
+            String[] CHECKDATA= new String[lineCount];
+            int index = 0,counter_wrong_line=0;
+            lineCount=0;
+            int wrong_num=0;
+            Scanner myReaderr = new Scanner(new File(PATH),"UTF8");
+            while (myReaderr.hasNextLine()) {
+                String data = myReaderr.nextLine();
+                CHECKDATA[index] = data;
+                String[] str=CHECKDATA[index].split(",");
+                if(str.length==6) {
+                	try {
+                		double point=Double.parseDouble(str[5]);
+                		int[] daysPerMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+                    	String[] b_date=str[4].split("\\.");
+                    	athlete_birthdate_day=Integer.parseInt(b_date[0]);
+                    	athlete_birthdate_month=Integer.parseInt(b_date[1]);
+                    	athlete_birthdate_year=Integer.parseInt(b_date[2]);
+                    	
+                    		if(((point<1&&point>0))&&(athlete_birthdate_year<2001)&&(athlete_birthdate_day>0 && athlete_birthdate_day<daysPerMonth[athlete_birthdate_month-1]&&
+                    		   athlete_birthdate_month>0&&athlete_birthdate_month<12)||((athlete_birthdate_year%4==0)&&athlete_birthdate_day==29&&athlete_birthdate_month==02) )//11.15.1954
+                    			{lineCount++;}
+                	}
+                	catch(Exception e) {
+                		wrong_num++;
+                	}
+                }
+                else {counter_wrong_line++;}//invalid line-attributes
+                index++;  //to get all data               
             }
-            myReader2.close();
+            myReaderr.close();
+            if(wrong_num>0) {
+           		System.out.println("Please check the numbers");
+            }
+
+            METADATA = new String[lineCount];//6 attributes + valid birthdate
+            index = 0;
+            for (int i = 0; i < CHECKDATA.length; i++) {
+            	String[] str=CHECKDATA[i].split(",");
+                if(str.length==6) {
+                	try {
+                		double point=Double.parseDouble(str[5]);
+                		int[] daysPerMonth = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+                    	String[] b_date=str[4].split("\\.");
+                    	athlete_birthdate_day=Integer.parseInt(b_date[0]);
+                    	athlete_birthdate_month=Integer.parseInt(b_date[1]);
+                    	athlete_birthdate_year=Integer.parseInt(b_date[2]);
+                    		if(((point<1&&point>0))&&(athlete_birthdate_year<2001)&&(athlete_birthdate_day>0 && athlete_birthdate_day<daysPerMonth[athlete_birthdate_month-1]&&
+                         		   athlete_birthdate_month>0&&athlete_birthdate_month<12)||((athlete_birthdate_year%4==0)&&athlete_birthdate_day==29&&athlete_birthdate_month==02)) //11.15.1954
+                    			{
+                    			METADATA[index]=CHECKDATA[i];
+                    			index++;}
+                	}
+                	catch(Exception e) 
+                	{
+                	}
+                	
+                }
+             }
+                            
+            if(counter_wrong_line>0) {
+            System.out.println(counter_wrong_line+" wrong lines were founded ");
+        }
+        	
         } catch (FileNotFoundException e) {
             System.out.println(e);
             System.exit(0);
         } catch (Exception ex) {
             System.out.println(ex);
-            System.exit(0);
         }
+        
         return METADATA;
     }
 
