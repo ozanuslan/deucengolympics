@@ -23,7 +23,7 @@ public class InputFile {
 
     private boolean isSeen;
     private boolean isFull;
-    
+
     private static int athlete_birthdate_day;
     private static int athlete_birthdate_month;
     private static int athlete_birthdate_year;
@@ -32,84 +32,92 @@ public class InputFile {
     public static String[] open(String PATH) {
         try {
             int lineCount = 0;
-            Scanner myReader = new Scanner(new File(PATH),"UTF8");
+            Scanner myReader = new Scanner(new File(PATH), "UTF8");
             while (myReader.hasNextLine()) {
                 myReader.nextLine();
                 lineCount++;
             }
             myReader.close();
 
-            
-            String[] CHECKDATA= new String[lineCount];
-            int index = 0,counter_wrong_line=0;
-            lineCount=0;
-            int wrong_num=0;
-            Scanner myReaderr = new Scanner(new File(PATH),"UTF8");
+            String[] CHECKDATA = new String[lineCount];
+            int index = 0, counter_wrong_line = 0;
+            lineCount = 0;
+            int wrong_num = 0;
+            Scanner myReaderr = new Scanner(new File(PATH), "UTF8");
             while (myReaderr.hasNextLine()) {
                 String data = myReaderr.nextLine();
                 CHECKDATA[index] = data;
-                String[] str=CHECKDATA[index].split(",");
-                if(str.length==6) {
-                	try {
-                		double point=Double.parseDouble(str[5]);
-                		int[] daysPerMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-                    	String[] b_date=str[4].split("\\.");
-                    	athlete_birthdate_day=Integer.parseInt(b_date[0]);
-                    	athlete_birthdate_month=Integer.parseInt(b_date[1]);
-                    	athlete_birthdate_year=Integer.parseInt(b_date[2]);
-                    	
-                    		if(((point<1&&point>0))&&(athlete_birthdate_year<2001)&&(athlete_birthdate_day>0 && athlete_birthdate_day<daysPerMonth[athlete_birthdate_month-1]&&
-                    		   athlete_birthdate_month>0&&athlete_birthdate_month<12)||((athlete_birthdate_year%4==0)&&athlete_birthdate_day==29&&athlete_birthdate_month==02) )//11.15.1954
-                    			{lineCount++;}
-                	}
-                	catch(Exception e) {
-                		wrong_num++;
-                	}
-                }
-                else {counter_wrong_line++;}//invalid line-attributes
-                index++;  //to get all data               
+                String[] str = CHECKDATA[index].split(",");
+                if (str.length == 6) {
+                    try {
+                        double point = Double.parseDouble(str[5]);
+                        int[] daysPerMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+                        String[] b_date = str[4].split("\\.");
+                        athlete_birthdate_day = Integer.parseInt(b_date[0]);
+                        athlete_birthdate_month = Integer.parseInt(b_date[1]);
+                        athlete_birthdate_year = Integer.parseInt(b_date[2]);
+
+                        if (((point < 1 && point > 0)) && (athlete_birthdate_year < 2001)
+                                && (athlete_birthdate_day > 0
+                                        && athlete_birthdate_day < daysPerMonth[athlete_birthdate_month - 1]
+                                        && athlete_birthdate_month > 0 && athlete_birthdate_month < 12)
+                                || ((athlete_birthdate_year % 4 == 0) && athlete_birthdate_day == 29
+                                        && athlete_birthdate_month == 02))// 11.15.1954
+                        {
+                            lineCount++;
+                        }
+                    } catch (Exception e) {
+                        wrong_num++;
+                    }
+                } else {
+                    counter_wrong_line++;
+                } // invalid line-attributes
+                index++; // to get all data
             }
             myReaderr.close();
-            if(wrong_num>0) {
-           		System.out.println("Please check the numbers");
+            if (wrong_num > 0) {
+                System.out.println("Please check the numbers");
             }
 
-            METADATA = new String[lineCount];//6 attributes + valid birthdate
+            METADATA = new String[lineCount];// 6 attributes + valid birthdate
             index = 0;
             for (int i = 0; i < CHECKDATA.length; i++) {
-            	String[] str=CHECKDATA[i].split(",");
-                if(str.length==6) {
-                	try {
-                		double point=Double.parseDouble(str[5]);
-                		int[] daysPerMonth = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-                    	String[] b_date=str[4].split("\\.");
-                    	athlete_birthdate_day=Integer.parseInt(b_date[0]);
-                    	athlete_birthdate_month=Integer.parseInt(b_date[1]);
-                    	athlete_birthdate_year=Integer.parseInt(b_date[2]);
-                    		if(((point<1&&point>0))&&(athlete_birthdate_year<2001)&&(athlete_birthdate_day>0 && athlete_birthdate_day<daysPerMonth[athlete_birthdate_month-1]&&
-                         		   athlete_birthdate_month>0&&athlete_birthdate_month<12)||((athlete_birthdate_year%4==0)&&athlete_birthdate_day==29&&athlete_birthdate_month==02)) //11.15.1954
-                    			{
-                    			METADATA[index]=CHECKDATA[i];
-                    			index++;}
-                	}
-                	catch(Exception e) 
-                	{
-                	}
-                	
+                String[] str = CHECKDATA[i].split(",");
+                if (str.length == 6) {
+                    try {
+                        double point = Double.parseDouble(str[5]);
+                        int[] daysPerMonth = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+                        String[] b_date = str[4].split("\\.");
+                        athlete_birthdate_day = Integer.parseInt(b_date[0]);
+                        athlete_birthdate_month = Integer.parseInt(b_date[1]);
+                        athlete_birthdate_year = Integer.parseInt(b_date[2]);
+                        if (((point < 1 && point > 0)) && (athlete_birthdate_year < 2001)
+                                && (athlete_birthdate_day > 0
+                                        && athlete_birthdate_day < daysPerMonth[athlete_birthdate_month - 1]
+                                        && athlete_birthdate_month > 0 && athlete_birthdate_month < 12)
+                                || ((athlete_birthdate_year % 4 == 0) && athlete_birthdate_day == 29
+                                        && athlete_birthdate_month == 02)) // 11.15.1954
+                        {
+                            METADATA[index] = CHECKDATA[i];
+                            index++;
+                        }
+                    } catch (Exception e) {
+                    }
+
                 }
-             }
-                            
-            if(counter_wrong_line>0) {
-            System.out.println(counter_wrong_line+" wrong lines were founded ");
-        }
-        	
+            }
+
+            if (counter_wrong_line > 0) {
+                System.out.println(counter_wrong_line + " wrong lines were founded ");
+            }
+
         } catch (FileNotFoundException e) {
             System.out.println(e);
             System.exit(0);
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        
+
         return METADATA;
     }
 
@@ -134,7 +142,7 @@ public class InputFile {
             }
         }
         if (isFull) {
-            // todo: error message
+            System.out.println("Country limit exceeded.");
         }
 
         COUNTRIES = new Country[countryIndex];
@@ -166,7 +174,7 @@ public class InputFile {
             }
         }
         if (isFull) {
-            // todo: error message
+            System.out.println("Sport limit exceeded.");
         }
 
         SPORTS = new Sport[sportIndex];
@@ -180,7 +188,7 @@ public class InputFile {
     // Fill the object array of athletes for ease of access on the information
     // dataSplit[COUNTRY,SPORT,NAME,GENDER,BIRTHDATE,SKILL]
     public void fillAthleteData() {
-        for(int i = 0; i<seenAthlete.length; i++){
+        for (int i = 0; i < seenAthlete.length; i++) {
             seenAthlete[i] = new Athlete();
         }
         int duplicateAthlete = 0;
@@ -189,7 +197,8 @@ public class InputFile {
             dataSplit = METADATA[i].split(",");
             isSeen = false;
             for (int j = 0; j < seenAthlete.length; j++) {
-                if (dataSplit[0].equalsIgnoreCase(seenAthlete[j].country)&& dataSplit[1].equalsIgnoreCase(seenAthlete[j].sport)){
+                if (dataSplit[0].equalsIgnoreCase(seenAthlete[j].country)
+                        && dataSplit[1].equalsIgnoreCase(seenAthlete[j].sport)) {
                     isSeen = true;
                     break;
                 }
@@ -199,18 +208,18 @@ public class InputFile {
                 break;
             }
             if (!isSeen) {
-                seenAthlete[athleteIndex] = new Athlete(dataSplit[0].toUpperCase(), dataSplit[1].toUpperCase(), dataSplit[2] , dataSplit[4] , dataSplit[3], Double.parseDouble(dataSplit[5]));
+                seenAthlete[athleteIndex] = new Athlete(dataSplit[0].toUpperCase(), dataSplit[1].toUpperCase(),
+                        dataSplit[2], dataSplit[4], dataSplit[3], Double.parseDouble(dataSplit[5]));
                 athleteIndex++;
-            }
-            else{
+            } else {
                 duplicateAthlete++;
             }
         }
         if (isFull) {
-            // todo: error message
+            System.out.println("Athlete limit exceeded.");
         }
-        if(duplicateAthlete>0){
-            System.out.println(duplicateAthlete+" duplicate athletes found.");
+        if (duplicateAthlete > 0) {
+            System.out.println(duplicateAthlete + " duplicate athletes found.");
         }
 
         ATHLETES = new Athlete[athleteIndex];
@@ -218,14 +227,14 @@ public class InputFile {
             ATHLETES[i] = new Athlete();
             ATHLETES[i] = seenAthlete[i];
         }
-        for(int i = 0; i< ATHLETES.length; i++){
+        for (int i = 0; i < ATHLETES.length; i++) {
             for (int j = 0; j < SPORTS.length; j++) {
                 if (ATHLETES[i].sport.equals(SPORTS[j].sport)) {
                     SPORTS[j].incrementPlayerCount();
                     break;
                 }
             }
-        }    
+        }
     }
 
     public Sport[] fillSportAthlete() {
@@ -234,7 +243,7 @@ public class InputFile {
         }
         for (int i = 0; i < ATHLETES.length; i++) {
             for (int j = 0; j < SPORTS.length; j++) {
-                if(ATHLETES[i].sport.equals(SPORTS[j].sport)){
+                if (ATHLETES[i].sport.equals(SPORTS[j].sport)) {
                     SPORTS[j].ATHLETES_BY_SPORT[SPORTS[j].index] = ATHLETES[i];
                     SPORTS[j].incrementIndex();
                     break;
