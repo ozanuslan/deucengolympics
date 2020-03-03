@@ -1,7 +1,7 @@
 public class Sport {
     String sport;
     Athlete[] ATHLETES_BY_SPORT;
-    int index;
+    int index; // Index of the athlete being put in the athletes_by_sport array
     int playerCount;
 
     public Sport(String sport) {
