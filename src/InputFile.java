@@ -75,7 +75,7 @@ public class InputFile {
             }
         }
         if (isFull) {
-            // todo: error message
+            System.out.println("Country limit exceeded.");
         }
 
         COUNTRIES = new Country[countryIndex];
@@ -107,7 +107,7 @@ public class InputFile {
             }
         }
         if (isFull) {
-            // todo: error message
+            System.out.println("Sport limit exceeded.");
         }
 
         SPORTS = new Sport[sportIndex];
@@ -148,7 +148,7 @@ public class InputFile {
             }
         }
         if (isFull) {
-            // todo: error message
+            System.out.println("Athlete limit exceeded.");
         }
         if(duplicateAthlete>0){
             System.out.println(duplicateAthlete+" duplicate athletes found.");
