@@ -195,7 +195,7 @@ public class Menu {
     }
 
     private void printMatchesByDate(){
-        System.out.print("Enter the date of which you would like to see the matches of (DD.MM.YYYY): ");
+        System.out.print("Enter the date which you would like to see the matches of (DD.MM.YYYY): ");
         String dateInput = sc.nextLine();
         String[] dateSplit = dateInput.split("\\.");
         int day;
